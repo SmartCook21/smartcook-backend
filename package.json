@@ -18,6 +18,7 @@
     "#exceptions/*": "./app/exceptions/*.js",
     "#models/*": "./app/models/*.js",
     "#mails/*": "./app/mails/*.js",
+    "#utils/*": "./app/utils/*.js",
     "#enums/*": "./app/enums/*.js",
     "#services/*": "./app/services/*.js",
     "#listeners/*": "./app/listeners/*.js",
@@ -30,7 +31,9 @@
     "#database/*": "./database/*.js",
     "#start/*": "./start/*.js",
     "#tests/*": "./tests/*.js",
-    "#config/*": "./config/*.js"
+    "#helpers/*": "./helpers/*.js",
+    "#config/*": "./config/*.js",
+    "#routes/*": "./start/routes/*.js"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^7.8.2",
@@ -55,6 +58,7 @@
     "@adonisjs/auth": "^9.3.1",
     "@adonisjs/core": "^6.17.2",
     "@adonisjs/cors": "^2.2.1",
+    "@adonisjs/limiter": "^2.3.3",
     "@adonisjs/lucid": "^21.6.0",
     "@adonisjs/session": "^7.5.1",
     "@vinejs/vine": "^3.0.0",
