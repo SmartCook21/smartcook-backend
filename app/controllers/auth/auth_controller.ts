@@ -64,7 +64,6 @@ export default class AuthController {
   }
 
   async register({ request, response }: HttpContext) {
-    const referralCode = request.input('ref')
     const data = request.all()
 
     const payload = await signUpValidator.validate(data)

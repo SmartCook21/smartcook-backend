@@ -8,3 +8,16 @@
 */
 
 import '#routes/auth'
+import AutoSwagger from 'adonis-autoswagger'
+import swagger from '#config/swagger'
+import router from '@adonisjs/core/services/router'
+
+// returns swagger in YAML
+router.get('/swagger', async () => {
+  return AutoSwagger.default.docs(router.toJSON(), swagger)
+})
+
+// Renders Swagger-UI and passes YAML-output of /swagger
+router.get('/docs', async () => {
+  return AutoSwagger.default.ui('/swagger', swagger)
+})
