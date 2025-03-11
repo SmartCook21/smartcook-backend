@@ -38,7 +38,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RateLimitError'
-
   /auth/register:
     post:
       tags:
@@ -64,7 +63,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
   /auth/logout:
     post:
       tags:
@@ -78,7 +76,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LogoutResponse'
-
   /auth/forgot-password:
     post:
       tags:
@@ -104,7 +101,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundError'
-
   /auth/reset-password:
     post:
       tags:
@@ -130,7 +126,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundError'
-
   /auth/change-password:
     post:
       tags:
@@ -156,6 +151,317 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+  /articles:
+    post:
+      tags:
+        - Articles
+      summary: Create Article
+      description: Create a new article.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateArticleRequest'
+      responses:
+        201:
+          description: Article created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleResponse'
+  /articles/{id}:
+    get:
+      tags:
+        - Articles
+      summary: Get Article
+      description: Retrieve a specific article by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Article details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleResponse'
+    put:
+      tags:
+        - Articles
+      summary: Update Article
+      description: Update an article.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateArticleRequest'
+      responses:
+        200:
+          description: Article updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleResponse'
+    delete:
+      tags:
+        - Articles
+      summary: Delete Article
+      description: Delete an article by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: Article deleted successfully
+  /articles/{courseId}/add:
+    post:
+      tags:
+        - Articles
+      summary: Add Article to Course
+      description: Add a new article to a course.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddArticleToCourseRequest'
+      responses:
+        201:
+          description: Article added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleResponse'
+  /articles/{articleId}/tags/{tagId}:
+    post:
+      tags:
+        - Articles
+      summary: Attach Tag to Article
+      description: Assign a tag to an article.
+      parameters:
+        - name: articleId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: tagId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Tag attached successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleResponse'
+
+  /courses:
+    post:
+      tags:
+        - Courses
+      summary: Create Course
+      description: Create a new course.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCourseRequest'
+      responses:
+        201:
+          description: Course created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseResponse'
+
+  /courses/{id}:
+    get:
+      tags:
+        - Courses
+      summary: Get Course
+      description: Retrieve a specific course by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Course details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseResponse'
+    put:
+      tags:
+        - Courses
+      summary: Update Course
+      description: Update a course.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCourseRequest'
+      responses:
+        200:
+          description: Course updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseResponse'
+    delete:
+      tags:
+        - Courses
+      summary: Delete Course
+      description: Delete a course by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: Course deleted successfully
+
+  /invitations:
+    post:
+      tags:
+        - Invitations
+      summary: Create Invitation
+      description: Send an invitation to a user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInvitationRequest'
+      responses:
+        201:
+          description: Invitation created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvitationResponse'
+
+  /invitations/{id}:
+    get:
+      tags:
+        - Invitations
+      summary: Get Invitation
+      description: Retrieve a specific invitation by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Invitation details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvitationResponse'
+    delete:
+      tags:
+        - Invitations
+      summary: Delete Invitation
+      description: Delete an invitation by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: Invitation deleted successfully
+
+  /tags:
+    post:
+      tags:
+        - Tags
+      summary: Create Tag
+      description: Create a new tag.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTagRequest'
+      responses:
+        201:
+          description: Tag created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResponse'
+
+  /tags/{id}:
+    get:
+      tags:
+        - Tags
+      summary: Get Tag
+      description: Retrieve a specific tag by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Tag details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResponse'
+    put:
+      tags:
+        - Tags
+      summary: Update Tag
+      description: Update an existing tag.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTagRequest'
+      responses:
+        200:
+          description: Tag updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResponse'
+    delete:
+      tags:
+        - Tags
+      summary: Delete Tag
+      description: Delete a tag by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: Tag deleted successfully
 
 components:
   schemas:
@@ -304,3 +610,155 @@ components:
         message:
           type: string
           example: "Too many requests, please try again later."
+
+    CreateArticleRequest:
+      type: object
+      properties:
+        course_id:
+          type: string
+          example: "course-id"
+        name:
+          type: string
+          example: "Dishwashing Liquid"
+        quantity:
+          type: integer
+          example: 2
+        tags_id:
+          type: array
+          items:
+            type: integer
+          example: [ 1, 2 ]
+
+    UpdateArticleRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Updated Article Name"
+        quantity:
+          type: integer
+          example: 3
+        tags_id:
+          type: array
+          items:
+            type: integer
+          example: [ 2, 3 ]
+
+    AddArticleToCourseRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "New Article"
+        quantity:
+          type: integer
+          example: 1
+        tags_id:
+          type: array
+          items:
+            type: integer
+          example: [ 1 ]
+
+    ArticleResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Dishwashing Liquid"
+        quantity:
+          type: integer
+          example: 2
+        tags_id:
+          type: array
+          items:
+            type: integer
+          example: [ 1, 2 ]
+
+    CreateCourseRequest:
+      type: object
+      properties:
+        creator:
+          type: string
+          example: "user-id"
+        name:
+          type: string
+          example: "My Shopping List"
+
+    UpdateCourseRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Updated Course Name"
+
+    CourseResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "course-id"
+        name:
+          type: string
+          example: "My Shopping List"
+        creator:
+          type: string
+          example: "user-id"
+    CreateInvitationRequest:
+      type: object
+      properties:
+        course_id:
+          type: string
+          example: "course-id"
+        invited_email:
+          type: string
+          format: email
+          example: "invitee@example.com"
+
+    InvitationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "invitation-id"
+        course_id:
+          type: string
+          example: "course-id"
+        invited_email:
+          type: string
+          format: email
+          example: "invitee@example.com"
+    CreateTagRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Groceries"
+        color:
+          type: string
+          example: "#ff0000"
+
+    UpdateTagRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Updated Tag Name"
+        color:
+          type: string
+          example: "#00ff00"
+
+    TagResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "tag-id"
+        name:
+          type: string
+          example: "Groceries"
+        color:
+          type: string
+          example: "#ff0000"
