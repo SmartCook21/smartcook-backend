@@ -1,13 +1,14 @@
 import { HttpContext } from '@adonisjs/core/http'
 import { inject } from '@adonisjs/core'
 import CourseService from '#services/courses_service'
+import { createCourseValidator, updateCourseValidator } from '#validators/course_validator'
 
 @inject()
 export default class CoursesController {
   constructor(private courseService: CourseService) {}
 
   async create({ request, response }: HttpContext): Promise<void> {
-    const data = request.only(['creator', 'name'])
+    const data = await request.validateUsing(createCourseValidator)
     const course = await this.courseService.create(data)
     return response.created(course)
   }
@@ -18,7 +19,7 @@ export default class CoursesController {
   }
 
   async update({ params, request, response }: HttpContext): Promise<void> {
-    const data = request.only(['name'])
+    const data = await request.validateUsing(updateCourseValidator)
     const course = await this.courseService.update(params.id, data)
     return response.ok(course)
   }

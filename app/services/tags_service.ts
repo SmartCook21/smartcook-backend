@@ -1,8 +1,9 @@
 import Tag from '#models/tag'
+import User from '#models/user'
 
 export default class TagService {
-  async create(data: Partial<Tag>): Promise<Tag> {
-    return await Tag.create(data)
+  async create(user: User, data: Partial<Tag>): Promise<Tag> {
+    return await Tag.create({ ...data, userId: user.id })
   }
 
   async findById(id: number): Promise<Tag | null> {

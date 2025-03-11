@@ -1,13 +1,19 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { inject } from '@adonisjs/core'
 import ArticlesService from '#services/articles_service'
+import {
+  addArticleToCourseValidator,
+  attachTagValidator,
+  createArticleValidator,
+  updateArticleValidator,
+} from '#validators/article_validator'
 
 @inject()
 export default class ArticlesController {
   constructor(private articleService: ArticlesService) {}
 
   async create({ request, response }: HttpContext): Promise<void> {
-    const data = request.only(['course_id', 'name', 'quantity', 'tags_id'])
+    const data = await request.validateUsing(createArticleValidator)
     const article = await this.articleService.create(data)
     return response.created(article)
   }
@@ -18,7 +24,7 @@ export default class ArticlesController {
   }
 
   async update({ params, request, response }: HttpContext): Promise<void> {
-    const data = request.only(['name', 'quantity', 'tags_id'])
+    const data = await request.validateUsing(updateArticleValidator)
     const article = await this.articleService.update(params.id, data)
     return response.ok(article)
   }
@@ -29,14 +35,14 @@ export default class ArticlesController {
   }
 
   async addArticleToCourse({ params, request, response }: HttpContext): Promise<void> {
-    const data = request.only(['name', 'quantity', 'tagsId'])
+    const data = await request.validateUsing(addArticleToCourseValidator)
     const article = await this.articleService.addArticleToCourse(params.courseId, data)
     return response.created(article)
   }
 
   async attachTag({ request, response }: HttpContext): Promise<void> {
-    const data = request.only(['article_id', 'tags_id'])
-    const article = await this.articleService.attachTag(data.article_id, data.tags_id)
+    const data = await request.validateUsing(attachTagValidator)
+    const article = await this.articleService.attachTag(data.articleId, data.tagsId)
     return response.ok(article)
   }
 }

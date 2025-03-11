@@ -8,6 +8,10 @@
 */
 
 import '#routes/auth'
+import '#routes/courses'
+import '#routes/articles'
+import '#routes/invitations'
+import '#routes/tags'
 import AutoSwagger from 'adonis-autoswagger'
 import swagger from '#config/swagger'
 import router from '@adonisjs/core/services/router'

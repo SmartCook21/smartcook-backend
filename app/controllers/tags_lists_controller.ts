@@ -1,14 +1,16 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { inject } from '@adonisjs/core'
 import TagService from '#services/tags_service'
+import { createTagValidator, updateTagValidator } from '#validators/tag_validator'
 
 @inject()
 export default class TagsListsController {
   constructor(private tagService: TagService) {}
 
-  async create({ request, response }: HttpContext): Promise<void> {
-    const data = request.only(['user_id', 'name', 'color'])
-    const tag = await this.tagService.create(data)
+  async create({ request, response, auth }: HttpContext): Promise<void> {
+    const data = await request.validateUsing(createTagValidator)
+    const user = auth.user!
+    const tag = await this.tagService.create(user, data)
     return response.created(tag)
   }
 
@@ -18,7 +20,7 @@ export default class TagsListsController {
   }
 
   async update({ params, request, response }: HttpContext): Promise<void> {
-    const data = request.only(['name', 'color'])
+    const data = await request.validateUsing(updateTagValidator)
     const tag = await this.tagService.update(params.id, data)
     return response.ok(tag)
   }

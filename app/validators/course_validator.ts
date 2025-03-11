@@ -1,0 +1,14 @@
+import vine from '@vinejs/vine'
+
+export const createCourseValidator = vine.compile(
+  vine.object({
+    creator: vine.string().uuid(),
+    name: vine.string().trim().minLength(2).maxLength(255),
+  })
+)
+
+export const updateCourseValidator = vine.compile(
+  vine.object({
+    name: vine.string().trim().minLength(2).maxLength(255).optional(),
+  })
+)
