@@ -17,7 +17,7 @@ export default class Article extends BaseModel {
   declare quantity: number
 
   @column()
-  declare tagsId: []
+  declare tagsId: number[]
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
