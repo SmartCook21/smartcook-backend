@@ -102,7 +102,7 @@ export default class AuthController {
       password: payload.password,
     })
 
-    await user.sendVerifyEmail()
+    // await user.sendVerifyEmail()
     return response.ok({
       success: true,
       message: 'Register successfully. Please verify your email.',
