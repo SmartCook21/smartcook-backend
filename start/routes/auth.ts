@@ -8,6 +8,7 @@ router
   .group(() => {
     router.post('/signin', [AuthController, 'login']).as('auth.signin')
     router.post('/signup', [AuthController, 'register']).as('auth.signup')
+    router.get('/me', [AuthController, 'me']).as('auth.me')
     router
       .post('/logout', [AuthController, 'logout'])
       .as('auth.logout')

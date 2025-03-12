@@ -248,4 +248,9 @@ export default class AuthController {
       message: 'Password change successfuly. Please reconnect.',
     })
   }
+
+  async me({ auth, response }: HttpContext) {
+    let user = await User.query().where('id', auth.user!.id).first()
+    return response.ok(user)
+  }
 }
