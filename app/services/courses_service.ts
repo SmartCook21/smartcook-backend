@@ -1,4 +1,5 @@
 import Course from '#models/course_list'
+import User from '#models/user'
 
 export default class CourseService {
   async create(data: Partial<Course>): Promise<Course> {
@@ -7,6 +8,10 @@ export default class CourseService {
 
   async findById(id: string): Promise<Course | null> {
     return await Course.find(id)
+  }
+
+  async getAll(user: User): Promise<Course | null> {
+    return await Course.findBy('userId', user.id)
   }
 
   async update(id: string, data: Partial<Course>): Promise<Course> {

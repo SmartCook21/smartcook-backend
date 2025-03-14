@@ -7,6 +7,12 @@ import { createTagValidator, updateTagValidator } from '#validators/tag_validato
 export default class TagsListsController {
   constructor(private tagService: TagService) {}
 
+  async index({ auth, response }: HttpContext): Promise<void> {
+    const user = auth.user!
+    const tag = await this.tagService.getAll(user)
+    return response.ok(tag)
+  }
+
   async create({ request, response, auth }: HttpContext): Promise<void> {
     const data = await request.validateUsing(createTagValidator)
     const user = auth.user!

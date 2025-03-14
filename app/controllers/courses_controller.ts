@@ -7,6 +7,12 @@ import { createCourseValidator, updateCourseValidator } from '#validators/course
 export default class CoursesController {
   constructor(private courseService: CourseService) {}
 
+  async index({ auth, response }: HttpContext): Promise<void> {
+    const user = auth.user!
+    const courses = await this.courseService.getAll(user)
+    return response.ok(courses)
+  }
+
   async create({ request, response }: HttpContext): Promise<void> {
     const data = await request.validateUsing(createCourseValidator)
     const course = await this.courseService.create(data)

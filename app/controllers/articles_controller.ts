@@ -23,6 +23,12 @@ export default class ArticlesController {
     return response.ok(article)
   }
 
+  async index({ auth, response }: HttpContext): Promise<void> {
+    const user = auth.user!
+    const article = await this.articleService.getAll(user)
+    return response.ok(article)
+  }
+
   async update({ params, request, response }: HttpContext): Promise<void> {
     const data = await request.validateUsing(updateArticleValidator)
     const article = await this.articleService.update(params.id, data)

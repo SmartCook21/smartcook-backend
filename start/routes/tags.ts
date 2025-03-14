@@ -4,6 +4,7 @@ const TagsListsController = () => import('#controllers/tags_lists_controller')
 
 router
   .group(() => {
+    router.get('/', [TagsListsController, 'index'])
     router.post('/', [TagsListsController, 'create'])
     router.get('/:id', [TagsListsController, 'show'])
     router.patch('/:id', [TagsListsController, 'update'])

@@ -4,6 +4,7 @@ const CoursesController = () => import('#controllers/courses_controller')
 
 router
   .group(() => {
+    router.get('/', [CoursesController, 'index'])
     router.post('/', [CoursesController, 'create'])
     router.get('/:id', [CoursesController, 'show'])
     router.patch('/:id', [CoursesController, 'update'])
