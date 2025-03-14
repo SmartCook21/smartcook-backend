@@ -4,11 +4,11 @@ const ArticlesController = () => import('#controllers/articles_controller')
 
 router
   .group(() => {
-    router.post('/courses/:courseId/articles', [ArticlesController, 'addArticleToCourse'])
-    router.get('/articles/:id', [ArticlesController, 'show'])
-    router.patch('/articles/:id', [ArticlesController, 'update'])
-    router.delete('/articles/:id', [ArticlesController, 'delete'])
-    router.post('/articles/:articleId/tags/:tagId', [ArticlesController, 'attachTag'])
+    router.post('/courses/:courseId', [ArticlesController, 'addArticleToCourse'])
+    router.get('/:id', [ArticlesController, 'show'])
+    router.patch('/:id', [ArticlesController, 'update'])
+    router.delete('/:id', [ArticlesController, 'delete'])
+    router.post('/:articleId/tags/:tagId', [ArticlesController, 'attachTag'])
   })
   .prefix('/articles')
   .middleware(middleware.auth())
