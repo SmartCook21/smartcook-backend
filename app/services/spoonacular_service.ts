@@ -18,7 +18,7 @@ export default class SpoonacularService {
 
       const { data } = await axios.get(API_URL, {
         params: {
-          ingredients: 'tomato+salad',
+          ingredients,
           number,
           ranking,
           ignorePantry,
