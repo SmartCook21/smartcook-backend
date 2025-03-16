@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
-import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import { BaseModel, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
+import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import CourseList from '#models/course_list'
+import Tag from '#models/tag'
 
 export default class Article extends BaseModel {
   @column({ isPrimary: true })
@@ -27,4 +28,7 @@ export default class Article extends BaseModel {
 
   @belongsTo(() => CourseList)
   declare course: BelongsTo<typeof CourseList>
+
+  @hasMany(() => Tag)
+  declare tags: HasMany<typeof Tag>
 }

@@ -10,8 +10,8 @@ export default class TagService {
     return await Tag.find(id)
   }
 
-  async getAll(user: User): Promise<Tag | null> {
-    return await Tag.findBy('userId', user.id)
+  async getAll(user: User): Promise<Tag[] | null> {
+    return await Tag.findManyBy('userId', user.id)
   }
 
   async update(id: number, data: Partial<Tag>): Promise<Tag> {

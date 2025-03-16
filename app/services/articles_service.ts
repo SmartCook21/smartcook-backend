@@ -11,8 +11,8 @@ export default class ArticlesService {
     return await Article.find(id)
   }
 
-  async getAll(user: User): Promise<Article | null> {
-    return await Article.findBy('userId', user.id)
+  async getAll(user: User): Promise<Article[] | null> {
+    return await Article.all()
   }
 
   async update(id: number, data: Partial<Article>): Promise<Article> {
