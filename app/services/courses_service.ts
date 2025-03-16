@@ -1,7 +1,6 @@
 import Course from '#models/course'
 import User from '#models/user'
 import { LucidModel, ModelQueryBuilderContract } from '@adonisjs/lucid/types/model'
-import Course from '#models/course'
 
 export default class CourseService {
   async create(data: Partial<Course>): Promise<Course> {
