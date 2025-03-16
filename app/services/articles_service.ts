@@ -1,5 +1,5 @@
 import Article from '#models/article'
-import CourseList from '#models/course_list'
+import Course from '#models/course'
 import User from '#models/user'
 
 export default class ArticlesService {
@@ -28,7 +28,7 @@ export default class ArticlesService {
   }
 
   async addArticleToCourse(courseId: string, data: Partial<Article>): Promise<Article> {
-    const course = await CourseList.findOrFail(courseId)
+    const course = await Course.findOrFail(courseId)
     return await Article.create({ ...data, courseId: course.id })
   }
 

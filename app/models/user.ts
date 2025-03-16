@@ -8,7 +8,7 @@ import type { HasMany } from '@adonisjs/lucid/types/relations'
 import Transaction from '#models/transaction'
 import Recipe from '#models/recipe'
 import { randomUUID } from 'node:crypto'
-import CourseList from '#models/course_list'
+import Course from '#models/course'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -55,8 +55,8 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @hasMany(() => Recipe)
   declare recipes: HasMany<typeof Recipe>
 
-  @hasMany(() => CourseList)
-  declare courses: HasMany<typeof CourseList>
+  @hasMany(() => Course)
+  declare courses: HasMany<typeof Course>
 
   @beforeCreate()
   static createUUID(user: User) {

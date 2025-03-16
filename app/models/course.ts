@@ -6,7 +6,7 @@ import { randomUUID } from 'node:crypto'
 import Article from '#models/article'
 import Invitation from '#models/invitation'
 
-export default class CourseList extends BaseModel {
+export default class Course extends BaseModel {
   @column({ isPrimary: true })
   declare id: string
 
@@ -32,7 +32,7 @@ export default class CourseList extends BaseModel {
   declare invitations: HasMany<typeof Invitation>
 
   @beforeCreate()
-  static createUUID(course: CourseList) {
+  static createUUID(course: Course) {
     course.id = randomUUID()
   }
 }

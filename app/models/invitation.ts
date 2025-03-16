@@ -2,7 +2,7 @@ import { DateTime } from 'luxon'
 import { afterCreate, BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import { InvitationState } from '#enums/invitation_state'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import CourseList from '#models/course_list'
+import Course from '#models/course'
 import { randomUUID } from 'node:crypto'
 
 export default class Invitation extends BaseModel {
@@ -27,8 +27,8 @@ export default class Invitation extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  @belongsTo(() => CourseList)
-  declare course: BelongsTo<typeof CourseList>
+  @belongsTo(() => Course)
+  declare course: BelongsTo<typeof Course>
 
   @afterCreate()
   static createSlug(invitation: Invitation) {

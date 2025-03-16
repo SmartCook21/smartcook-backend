@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
-import CourseList from '#models/course_list'
+import Course from '#models/course'
 import Tag from '#models/tag'
 
 export default class Article extends BaseModel {
@@ -26,8 +26,8 @@ export default class Article extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  @belongsTo(() => CourseList, { foreignKey: 'course_id', localKey: 'course_id' })
-  declare course: BelongsTo<typeof CourseList>
+  @belongsTo(() => Course)
+  declare course: BelongsTo<typeof Course>
 
   @hasMany(() => Tag)
   declare tags: HasMany<typeof Tag>

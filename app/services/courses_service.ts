@@ -1,16 +1,14 @@
-import Course from '#models/course_list'
+import Course from '#models/course'
 import User from '#models/user'
 import { LucidModel, ModelQueryBuilderContract } from '@adonisjs/lucid/types/model'
-import CourseList from '#models/course_list'
+import Course from '#models/course'
 
 export default class CourseService {
   async create(data: Partial<Course>): Promise<Course> {
     return await Course.create(data)
   }
 
-  async findById(
-    id: string
-  ): Promise<ModelQueryBuilderContract<CourseList, InstanceType<LucidModel>>> {
+  async findById(id: string): Promise<ModelQueryBuilderContract<Course, InstanceType<LucidModel>>> {
     return Course.query()
       .preload('articles', (query) => {
         query.select('id', 'name', 'quantity').preload('tags', (subQuery) => {
