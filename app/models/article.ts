@@ -26,7 +26,7 @@ export default class Article extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  @belongsTo(() => CourseList)
+  @belongsTo(() => CourseList, { foreignKey: 'courseId' })
   declare course: BelongsTo<typeof CourseList>
 
   @hasMany(() => Tag)
