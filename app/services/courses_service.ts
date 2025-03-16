@@ -13,8 +13,8 @@ export default class CourseService {
   ): Promise<ModelQueryBuilderContract<CourseList, InstanceType<LucidModel>>> {
     return Course.query()
       .preload('articles', (query) => {
-        query.select('name', 'quantity').preload('tags', (subQuery) => {
-          subQuery.select('name', 'color')
+        query.select('id', 'name', 'quantity').preload('tags', (subQuery) => {
+          subQuery.select('id', 'name', 'color')
         })
       })
       .where('id', id)
