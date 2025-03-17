@@ -38,7 +38,6 @@ export default class ArticlesService {
 
     // Extraire les tags de data (si présents)
     const tags = data.tags as number[] | undefined
-    delete data.tags // Supprimer tags de l'objet data pour éviter de l'insérer comme une colonne
 
     // Mettre à jour les autres champs de l'article
     article.merge(data)
@@ -46,9 +45,10 @@ export default class ArticlesService {
 
     // Si des tags sont fournis, mettre à jour la relation Many-to-Many
     if (tags) {
-      await article.related('tags').sync(tags) // Sync met à jour en supprimant les anciens et ajoutant les nouveaux
+      await article.related('tags').attach(tags)
     }
 
+    console.log(tags)
     // Charger les tags pour la réponse
     await article.load('tags')
 
