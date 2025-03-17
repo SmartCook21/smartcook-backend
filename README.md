@@ -42,8 +42,8 @@ node ace migration:run
 ```
 
 ## Development Server
-See the Swagger documentation `http://127.0.0.1:3333/docs`:
-Start the development server on `http://127.0.0.1:3333`:
+- See the Swagger documentation `http://127.0.0.1:3333/docs`:
+- Start the development server on `http://127.0.0.1:3333`:
 
 ```bash
 # npm
