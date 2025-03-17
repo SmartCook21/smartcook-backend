@@ -6,7 +6,6 @@ export default class ArticlesService {
   async create(user: User, data: Partial<Article>): Promise<Article> {
     // Extraire les tags s'ils sont fournis
     const tags = data.tags as number[] | undefined
-    delete data.tags // Supprimer les tags pour éviter un conflit avec la colonne tagsId
 
     // Créer l'article
     console.log(data)
