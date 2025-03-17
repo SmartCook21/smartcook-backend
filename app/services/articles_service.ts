@@ -4,7 +4,22 @@ import User from '#models/user'
 
 export default class ArticlesService {
   async create(data: Partial<Article>): Promise<Article> {
-    return await Article.create(data)
+    // Extraire les tags s'ils sont fournis
+    const tags = data.tags as number[] | undefined
+    delete data.tags // Supprimer les tags pour éviter un conflit avec la colonne tagsId
+
+    // Créer l'article
+    const article = await Article.create(data)
+
+    // Associer les tags à l'article si fournis
+    if (tags) {
+      await article.related('tags').attach(tags)
+    }
+
+    // Charger les tags pour la réponse
+    await article.load('tags')
+
+    return article
   }
 
   async findById(id: number): Promise<Article | null> {
