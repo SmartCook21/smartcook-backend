@@ -27,7 +27,7 @@ export default class Article extends BaseModel {
   declare updatedAt: DateTime
 
   @manyToMany(() => Course, {
-    pivotTable: 'article_course',
+    pivotTable: 'article_courses',
   })
   declare courses: ManyToMany<typeof Course>
 
