@@ -43,13 +43,7 @@ export default class ArticlesController {
 
   async addArticleToCourse({ params, request, response }: HttpContext): Promise<void> {
     const data = await request.validateUsing(addArticleToCourseValidator)
-    const article = await this.articleService.addArticleToCourse(params.courseId, data)
+    const article = await this.articleService.addArticlesToCourse(params.courseId, data)
     return response.created(article)
-  }
-
-  async attachTag({ request, response }: HttpContext): Promise<void> {
-    const data = await request.validateUsing(attachTagValidator)
-    const article = await this.articleService.attachTag(data.articleId, data.tagsId)
-    return response.ok(article)
   }
 }
