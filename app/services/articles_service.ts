@@ -81,11 +81,30 @@ export default class ArticlesService {
   async removeArticleFromCourse(courseId: string, articleId: number): Promise<void> {
     // Vérifier si le cours existe
     const course = await Course.findOrFail(courseId)
+    console.log(`Course trouvé: ${course.id}`)
 
-    // Vérifier si l'article est bien attaché à ce cours
+    // Vérifier si l'article existe
     const article = await Article.findOrFail(articleId)
+    console.log(`Article trouvé: ${article.id}`)
+
+    // Vérifier si l'association existe dans la table pivot
+    const isAttached = await course
+      .related('articles')
+      .query()
+      .wherePivot('article_id', article.id)
+      .wherePivot('course_id', course.id)
+      .first()
+
+    if (!isAttached) {
+      console.log(
+        `L'article ${article.id} n'est pas lié au cours ${course.id}, donc pas de suppression.`
+      )
+      return
+    }
 
     // Supprimer l'association entre l'article et le cours dans la table pivot
     await course.related('articles').detach([article.id])
+
+    console.log(`L'article ${article.id} a été détaché du cours ${course.id}`)
   }
 }
