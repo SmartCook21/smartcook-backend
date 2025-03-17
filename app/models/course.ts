@@ -33,7 +33,7 @@ export default class Course extends BaseModel {
   declare user: BelongsTo<typeof User>
 
   @manyToMany(() => Article, {
-    pivotTable: 'article_course',
+    pivotTable: 'article_courses',
   })
   declare articles: ManyToMany<typeof Article>
 
