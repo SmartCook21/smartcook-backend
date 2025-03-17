@@ -5,6 +5,7 @@ import {
   addArticleToCourseValidator,
   attachTagValidator,
   createArticleValidator,
+  removeArticleFromCourse,
   updateArticleValidator,
 } from '#validators/article_validator'
 
@@ -45,5 +46,11 @@ export default class ArticlesController {
     const data = await request.validateUsing(addArticleToCourseValidator)
     const article = await this.articleService.addArticlesToCourse(params.courseId, data)
     return response.created(article)
+  }
+
+  async removeArticleFromCourse({ params, request, response }: HttpContext): Promise<void> {
+    const data = await request.validateUsing(removeArticleFromCourse)
+    const article = await this.articleService.removeArticleFromCourse(params.courseId, data.id)
+    return response.ok(article)
   }
 }

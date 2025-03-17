@@ -77,4 +77,15 @@ export default class ArticlesService {
       })
     }
   }
+
+  async removeArticleFromCourse(courseId: string, articleId: number): Promise<void> {
+    // Vérifier si le cours existe
+    const course = await Course.findOrFail(courseId)
+
+    // Vérifier si l'article est bien attaché à ce cours
+    const article = await Article.findOrFail(articleId)
+
+    // Supprimer l'association entre l'article et le cours dans la table pivot
+    await course.related('articles').detach([article.id])
+  }
 }

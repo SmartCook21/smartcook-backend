@@ -24,3 +24,9 @@ export const addArticleToCourseValidator = vine.compile(
     ),
   })
 )
+
+export const removeArticleFromCourse = vine.compile(
+  vine.object({
+    id: vine.number().positive(),
+  })
+)

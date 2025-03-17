@@ -7,6 +7,7 @@ router
     router.get('/', [ArticlesController, 'index'])
     router.post('/', [ArticlesController, 'create'])
     router.post('/courses/:courseId', [ArticlesController, 'addArticleToCourse'])
+    router.delete('/courses/:courseId', [ArticlesController, 'removeArticleFromCourse'])
     router.get('/:id', [ArticlesController, 'show'])
     router.patch('/:id', [ArticlesController, 'update'])
     router.delete('/:id', [ArticlesController, 'delete'])
