@@ -10,9 +10,12 @@ export default class CourseService {
   async findById(id: string): Promise<ModelQueryBuilderContract<Course, InstanceType<LucidModel>>> {
     return Course.query()
       .preload('articles', (query) => {
-        query.select('id', 'name', 'quantity').preload('tags', (subQuery) => {
-          subQuery.select('id', 'name', 'color')
-        })
+        query
+          .select('articles.id', 'articles.name')
+          .pivotColumns(['quantity'])
+          .preload('tags', (subQuery) => {
+            subQuery.select('id', 'name', 'color')
+          })
       })
       .where('id', id)
   }
