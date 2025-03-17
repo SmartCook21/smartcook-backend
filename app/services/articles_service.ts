@@ -9,6 +9,7 @@ export default class ArticlesService {
     delete data.tags // Supprimer les tags pour éviter un conflit avec la colonne tagsId
 
     // Créer l'article
+    delete data.id
     const article = await Article.create(data)
 
     // Associer les tags à l'article si fournis
