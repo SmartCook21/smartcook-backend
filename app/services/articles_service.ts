@@ -62,14 +62,14 @@ export default class ArticlesService {
 
   async addArticlesToCourse(
     courseId: string,
-    data: { articles: { name: string; quantity: number }[] }
+    data: { articles: { id: number; quantity: number }[] }
   ): Promise<void> {
     // Vérifier si le cours existe
     const course = await Course.findOrFail(courseId)
 
     // Parcourir chaque article du tableau
     for (const articleData of data.articles) {
-      const article = await Article.findByOrFail('name', articleData.name)
+      const article = await Article.find('name', articleData.id)
 
       // Associer l'article au cours avec la quantité via la table pivot
       await course.related('articles').attach({
