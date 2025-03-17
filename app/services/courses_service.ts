@@ -8,7 +8,7 @@ export default class CourseService {
   }
 
   async findById(id: string): Promise<InstanceType<LucidModel> | null> {
-    return Course.query()
+    const course = return Course.query()
       .preload('articles', (query) => {
         query
           .select('articles.id', 'articles.name')
@@ -19,6 +19,8 @@ export default class CourseService {
       })
       .where('id', id)
       .first()
+    console.log(course)
+    return course
   }
 
   async getAll(user: User): Promise<Course[] | null> {
