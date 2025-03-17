@@ -1,7 +1,14 @@
 import { DateTime } from 'luxon'
-import { BaseModel, beforeCreate, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
+import {
+  BaseModel,
+  beforeCreate,
+  belongsTo,
+  column,
+  hasMany,
+  manyToMany,
+} from '@adonisjs/lucid/orm'
 import User from '#models/user'
-import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
+import type { BelongsTo, HasMany, ManyToMany } from '@adonisjs/lucid/types/relations'
 import { randomUUID } from 'node:crypto'
 import Article from '#models/article'
 import Invitation from '#models/invitation'
@@ -25,8 +32,10 @@ export default class Course extends BaseModel {
   @belongsTo(() => User)
   declare user: BelongsTo<typeof User>
 
-  @hasMany(() => Article)
-  declare articles: HasMany<typeof Article>
+  @manyToMany(() => Article, {
+    pivotTable: 'article_course',
+  })
+  declare articles: ManyToMany<typeof Article>
 
   @hasMany(() => Invitation)
   declare invitations: HasMany<typeof Invitation>

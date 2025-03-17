@@ -25,6 +25,18 @@ export default class CourseService {
     const course = await Course.findOrFail(id)
     course.merge(data)
     await course.save()
+
+    if (data.articles) {
+      await course.related('articles').detach()
+
+      const articlesData: Record<number, { quantity: number }> = {}
+      data.articles.forEach((article) => {
+        articlesData[article.id] = { quantity: article.quantity }
+      })
+
+      await course.related('articles').attach(articlesData)
+    }
+
     return course
   }
 
