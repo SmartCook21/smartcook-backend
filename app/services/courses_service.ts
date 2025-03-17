@@ -19,16 +19,12 @@ export default class CourseService {
       .where('id', id)
       .first()
 
-    course.articles.map((article) => {
-      console.log(article.$extras)
-    })
-
     // Convertir en JSON et inclure `quantity`
     return {
       ...course.toJSON(),
       articles: course.articles.map((article) => ({
         ...article.toJSON(),
-        quantity: article.$extras.quantity, // Récupérer `quantity` depuis la table pivot
+        quantity: article.$extras.pivot_quantity,
       })),
     }
   }
