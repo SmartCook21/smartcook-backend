@@ -19,7 +19,10 @@ export default class CourseService {
       .where('id', id)
       .first()
 
-    console.log(course.articles.toString())
+    course.articles.map((article) => {
+      console.log(article.$extras)
+    })
+
     // Convertir en JSON et inclure `quantity`
     return {
       ...course.toJSON(),
