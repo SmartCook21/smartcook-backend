@@ -3,7 +3,7 @@ import vine from '@vinejs/vine'
 export const createArticleValidator = vine.compile(
   vine.object({
     name: vine.string().trim().minLength(2).maxLength(255),
-    tags_id: vine.array(vine.number()).optional(),
+    tags: vine.array(vine.number()).optional(),
   })
 )
 
