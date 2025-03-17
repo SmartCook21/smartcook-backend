@@ -12,7 +12,7 @@ export default class ArticlesService {
   }
 
   async getAll(user: User): Promise<Article[] | null> {
-    return await Article.query().preload('tags').where('')
+    return Article.query().preload('tags').where('userId', user.id)
   }
 
   async update(id: number, data: Partial<Article>): Promise<Article> {
