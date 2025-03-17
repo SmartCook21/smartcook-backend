@@ -19,6 +19,7 @@ export default class CourseService {
       .where('id', id)
       .first()
 
+    console.log(course.articles.toString())
     // Convertir en JSON et inclure `quantity`
     return {
       ...course.toJSON(),
