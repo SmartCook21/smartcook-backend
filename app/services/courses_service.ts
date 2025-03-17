@@ -19,7 +19,7 @@ export default class CourseService {
       })
       .where('id', id)
       .first()
-    console.log(course)
+    console.log(course?.$preloaded)
     return course
   }
 
