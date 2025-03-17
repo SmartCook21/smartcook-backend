@@ -15,6 +15,7 @@ import '#routes/tags'
 import AutoSwagger from 'adonis-autoswagger'
 import swagger from '#config/swagger'
 import router from '@adonisjs/core/services/router'
+const HealthChecksController = () => import('#controllers/health_checks_controller')
 const SpoonacularController = () => import('#controllers/spoonacular_controller')
 
 // returns swagger in YAML
@@ -28,3 +29,4 @@ router.get('/docs', async () => {
 })
 
 router.post('/recipes', [SpoonacularController, 'findRecipesByIngredients'])
+router.get('/maintenance', [HealthChecksController])

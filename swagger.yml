@@ -189,7 +189,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ArticleResponse'
-    put:
+    patch:
       tags:
         - Articles
       summary: Update Article
@@ -304,7 +304,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CourseResponse'
-    put:
+    patch:
       tags:
         - Courses
       summary: Update Course
