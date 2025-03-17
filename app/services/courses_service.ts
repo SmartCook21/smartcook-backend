@@ -18,6 +18,7 @@ export default class CourseService {
           })
       })
       .where('id', id)
+      .first()
   }
 
   async getAll(user: User): Promise<Course[] | null> {
