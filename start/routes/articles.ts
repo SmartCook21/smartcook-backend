@@ -5,6 +5,7 @@ const ArticlesController = () => import('#controllers/articles_controller')
 router
   .group(() => {
     router.get('/', [ArticlesController, 'index'])
+    router.post('/', [ArticlesController, 'create'])
     router.post('/courses/:courseId', [ArticlesController, 'addArticleToCourse'])
     router.get('/:id', [ArticlesController, 'show'])
     router.patch('/:id', [ArticlesController, 'update'])
