@@ -10,5 +10,13 @@ export const createCourseValidator = vine.compile(
 export const updateCourseValidator = vine.compile(
   vine.object({
     name: vine.string().trim().minLength(2).maxLength(255).optional(),
+    articles: vine
+      .array(
+        vine.object({
+          id: vine.number().positive(),
+          quantity: vine.number().positive(),
+        })
+      )
+      .optional(),
   })
 )
