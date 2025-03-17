@@ -21,8 +21,17 @@ export default class CourseService {
       .first()
   }
 
-  async getAll(user: User): Promise<Course[] | null> {
-    return await Course.findManyBy('userId', user.id)
+  async getAll(user: User): Promise<Course[]> {
+    return Course.query()
+      .where('userId', user.id)
+      .preload('articles', (query) => {
+        query
+          .select('articles.id', 'articles.name')
+          .pivotColumns(['quantity']) // Récupérer la quantité depuis la table pivot
+          .preload('tags', (subQuery) => {
+            subQuery.select('id', 'name', 'color')
+          })
+      })
   }
 
   async update(id: string, data: Partial<Course>): Promise<Course> {
