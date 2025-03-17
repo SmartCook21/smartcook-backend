@@ -10,7 +10,6 @@ router
     router.get('/:id', [ArticlesController, 'show'])
     router.patch('/:id', [ArticlesController, 'update'])
     router.delete('/:id', [ArticlesController, 'delete'])
-    router.post('/:articleId/tags/:tagId', [ArticlesController, 'attachTag'])
   })
   .prefix('/articles')
   .middleware(middleware.auth())

@@ -60,15 +60,14 @@ export default class ArticlesService {
     await article.delete()
   }
 
-  async addArticleToCourse(courseId: string, data: Partial<Article>): Promise<Article> {
-    const course = await Course.findOrFail(courseId)
-    return await Article.create({ ...data, courseId: course.id })
-  }
-
-  async attachTag(articleId: number, tagId: number): Promise<Article> {
+  async addArticleToCourse(courseId: string, articleId: number, quantity: number): Promise<void> {
+    // Vérifier si l'article et le cours existent
     const article = await Article.findOrFail(articleId)
-    article.tagsId = [...(article.tagsId || []), tagId]
-    await article.save()
-    return article
+    const course = await Course.findOrFail(courseId)
+
+    // Associer l'article au cours avec la quantité via la table pivot
+    await course.related('articles').attach({
+      [article.id]: { quantity },
+    })
   }
 }
