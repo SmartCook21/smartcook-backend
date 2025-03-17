@@ -10,7 +10,6 @@ export const createArticleValidator = vine.compile(
 export const updateArticleValidator = vine.compile(
   vine.object({
     name: vine.string().trim().minLength(2).maxLength(255).optional(),
-    quantity: vine.number().min(1).optional(),
     tags_id: vine.array(vine.number()).optional(),
   })
 )
