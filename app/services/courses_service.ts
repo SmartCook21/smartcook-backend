@@ -1,26 +1,31 @@
 import Course from '#models/course'
 import User from '#models/user'
-import { LucidModel } from '@adonisjs/lucid/types/model'
 
 export default class CourseService {
   async create(data: Partial<Course>): Promise<Course> {
     return await Course.create(data)
   }
 
-  async findById(id: string): Promise<InstanceType<LucidModel> | null> {
-    const course = await Course.query()
+  async findById(id: string) {
+    const courses = await Course.query()
       .preload('articles', (query) => {
         query
           .select('articles.id', 'articles.name')
-          .pivotColumns(['quantity'])
+          .pivotColumns(['quantity']) // Assure que la colonne `quantity` de la table pivot est bien récupérée
           .preload('tags', (subQuery) => {
             subQuery.select('id', 'name', 'color')
           })
       })
       .where('id', id)
-      .first()
-    console.log(course?.$preloaded)
-    return course
+
+    // Convertir les résultats en JSON et mapper pour inclure `quantity`
+    return courses.map((course) => ({
+      ...course.toJSON(),
+      articles: course.articles.map((article) => ({
+        ...article.toJSON(),
+        quantity: article.$extras.quantity, // Récupérer `quantity` depuis la table pivot
+      })),
+    }))
   }
 
   async getAll(user: User): Promise<Course[] | null> {
