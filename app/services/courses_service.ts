@@ -8,7 +8,7 @@ export default class CourseService {
   }
 
   async findById(id: string): Promise<InstanceType<LucidModel> | null> {
-    const course = return Course.query()
+    const course = await Course.query()
       .preload('articles', (query) => {
         query
           .select('articles.id', 'articles.name')
