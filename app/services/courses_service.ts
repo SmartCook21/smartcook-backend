@@ -7,7 +7,7 @@ export default class CourseService {
   }
 
   async findById(id: string) {
-    const courses = await Course.query()
+    const course = await Course.query()
       .preload('articles', (query) => {
         query
           .select('articles.id', 'articles.name')
@@ -17,15 +17,16 @@ export default class CourseService {
           })
       })
       .where('id', id)
+      .first()
 
-    // Convertir les résultats en JSON et mapper pour inclure `quantity`
-    return courses.map((course) => ({
+    // Convertir en JSON et inclure `quantity`
+    return {
       ...course.toJSON(),
       articles: course.articles.map((article) => ({
         ...article.toJSON(),
         quantity: article.$extras.quantity, // Récupérer `quantity` depuis la table pivot
       })),
-    }))
+    }
   }
 
   async getAll(user: User): Promise<Course[] | null> {
