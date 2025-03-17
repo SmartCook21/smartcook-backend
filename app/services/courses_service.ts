@@ -1,13 +1,13 @@
 import Course from '#models/course'
 import User from '#models/user'
-import { LucidModel, ModelQueryBuilderContract } from '@adonisjs/lucid/types/model'
+import { LucidModel } from '@adonisjs/lucid/types/model'
 
 export default class CourseService {
   async create(data: Partial<Course>): Promise<Course> {
     return await Course.create(data)
   }
 
-  async findById(id: string): Promise<ModelQueryBuilderContract<Course, InstanceType<LucidModel>>> {
+  async findById(id: string): Promise<InstanceType<LucidModel> | null> {
     return Course.query()
       .preload('articles', (query) => {
         query
@@ -21,17 +21,8 @@ export default class CourseService {
       .first()
   }
 
-  async getAll(user: User): Promise<Course[]> {
-    return Course.query()
-      .where('userId', user.id)
-      .preload('articles', (query) => {
-        query
-          .select('articles.id', 'articles.name')
-          .pivotColumns(['quantity']) // Récupérer la quantité depuis la table pivot
-          .preload('tags', (subQuery) => {
-            subQuery.select('id', 'name', 'color')
-          })
-      })
+  async getAll(user: User): Promise<Course[] | null> {
+    return await Course.findManyBy('userId', user.id)
   }
 
   async update(id: string, data: Partial<Course>): Promise<Course> {
