@@ -9,7 +9,7 @@ export default class ArticlesService {
     delete data.tags // Supprimer les tags pour éviter un conflit avec la colonne tagsId
 
     // Créer l'article
-    delete data.id
+    console.log(data)
     const article = await Article.create({
       userId: user.id,
       name: data.name,
