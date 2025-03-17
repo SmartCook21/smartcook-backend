@@ -12,9 +12,10 @@ import {
 export default class ArticlesController {
   constructor(private articleService: ArticlesService) {}
 
-  async create({ request, response }: HttpContext): Promise<void> {
+  async create({ request, response, auth }: HttpContext): Promise<void> {
     const data = await request.validateUsing(createArticleValidator)
-    const article = await this.articleService.create(data)
+    const user = auth.user!
+    const article = await this.articleService.create(user, data)
     return response.created(article)
   }
 

@@ -3,14 +3,18 @@ import Course from '#models/course'
 import User from '#models/user'
 
 export default class ArticlesService {
-  async create(data: Partial<Article>): Promise<Article> {
+  async create(user: User, data: Partial<Article>): Promise<Article> {
     // Extraire les tags s'ils sont fournis
     const tags = data.tags as number[] | undefined
     delete data.tags // Supprimer les tags pour éviter un conflit avec la colonne tagsId
 
     // Créer l'article
     delete data.id
-    const article = await Article.create(data)
+    const article = await Article.create({
+      userId: user.id,
+      name: data.name,
+      tagsId: tags,
+    })
 
     // Associer les tags à l'article si fournis
     if (tags) {
