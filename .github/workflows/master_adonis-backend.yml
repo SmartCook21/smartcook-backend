@@ -12,21 +12,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      API_VERSION: 0.2
-      APP_KEY: nqGCsjRp0ltYJO39o7ZytxZ2UlAFEm81
-      DB_HOST: pg-projet-dev.postgres.database.azure.com
-      DB_DATABASE: postgres
-      DB_USER: pgadmin@pg-projet-dev
-      DB_PASSWORD: MotDePasseUltraSecure123
-      DB_PORT: 5432
-      NODE_ENV: production
-      LIMITER_STORE: database
-      SESSION_DRIVER: cookie
-      SPOONACULAR_API_KEY: 6a97de6372d74aab8150305681585c3e
-      TZ: UTC
-      HOST: 0.0.0.0
-
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -68,7 +53,7 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-
+      
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -83,3 +68,4 @@ jobs:
           app-name: 'adonis-backend'
           slot-name: 'Production'
           package: .
+          
