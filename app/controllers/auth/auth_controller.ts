@@ -19,7 +19,7 @@ export default class AuthController {
     const { email, password, remember } = payload
     const throttleKey = `login_${email}_${await getClientIp(request)}`
 
-    if (app.inProduction) {
+    /*if (app.inProduction) {
       if (payload.turnstileToken && payload.turnstileToken !== '') {
         if (!(await verifyTurnstileToken(payload.turnstileToken))) {
           return response.badRequest({
@@ -33,7 +33,7 @@ export default class AuthController {
           message: 'Please complete the captcha',
         })
       }
-    }
+    }*/
 
     const limit = limiter.use('database', {
       requests: 10,
