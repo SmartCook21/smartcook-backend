@@ -100,12 +100,13 @@ export default class AuthController {
     const user = await User.create({
       email: payload.email,
       password: payload.password,
+      emailVerified: true,
     })
 
     // await user.sendVerifyEmail()
     return response.ok({
       success: true,
-      message: 'Register successfully. Please verify your email.',
+      message: 'email: ' + user.email + ' pwd: ' + user.password,
     })
   }
 

@@ -29,7 +29,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare country: string | null
 
   @column()
-  declare emailVerified: string
+  declare emailVerified: boolean
 
   @column()
   declare googleId: string | null
