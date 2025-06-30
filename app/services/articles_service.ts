@@ -12,6 +12,7 @@ export default class ArticlesService {
     const article = await Article.create({
       userId: user.id,
       name: data.name,
+      quantity: 1,
     })
 
     // Associer les tags à l'article si fournis

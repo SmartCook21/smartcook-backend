@@ -30,7 +30,7 @@ export const http = defineConfig({
    * defined inside the "config/session.ts" file.
    */
   cookie: {
-    domain: app.inProduction ? '.whitefield-2196fd8d.swedencentral.azurecontainerapps.io' : '127.0.0.1',
+    domain: app.inProduction ? '.swedencentral.azurecontainerapps.io' : '127.0.0.1',
     path: '/',
     maxAge: '2h',
     httpOnly: true,

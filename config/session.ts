@@ -28,7 +28,7 @@ const sessionConfig = defineConfig({
     secure: app.inProduction,
     sameSite: app.inProduction ? 'none' : 'lax',
     //domain: app.inProduction ? '.my-studiz.com' : '127.0.0.1',
-    domain: app.inProduction ? '.whitefield-2196fd8d.swedencentral.azurecontainerapps.io' : '127.0.0.1',
+    domain: app.inProduction ? '.swedencentral.azurecontainerapps.io' : '127.0.0.1',
   },
 
   /**
