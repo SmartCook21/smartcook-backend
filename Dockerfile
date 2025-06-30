@@ -20,6 +20,9 @@ WORKDIR /app/backend
 COPY --from=deps /app/backend/node_modules /app/backend/node_modules
 COPY --from=build /app/backend/build /app/backend
 
+# Ensure the /uploads/private directory is included in the final image
+COPY --from=build /app/backend/uploads /app/backend/uploads
+
 # Expose the port the app runs on
 EXPOSE 3333
 
