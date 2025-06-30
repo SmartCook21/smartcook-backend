@@ -10,6 +10,7 @@ export default class extends BaseSchema {
       table.string('password').notNullable()
       table.string('country').nullable()
       table.boolean('email_verified').nullable()
+      table.string('avatar').nullable()
       table.string('google_id').nullable()
       table.string('google_email').nullable()
       table.string('google_access_token').nullable()
