@@ -5,6 +5,7 @@ const AvatarController = () => import('#controllers/avatar_controller')
 router
   .group(() => {
     router.post('/', [AvatarController, 'update'])
+    //router.get('/', [AvatarController, 'show'])
   })
   .prefix('/avatar')
   .middleware(middleware.auth())

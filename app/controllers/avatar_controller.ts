@@ -28,9 +28,19 @@ export default class AvatarController {
     user.avatar = avatarFile.meta.url
     await user.save()
 
-    return {
+    return response.ok({
       message: 'Avatar updated successfully',
-      url: user.avatar,
-    }
+      avatar: user.avatar,
+    })
   }
+
+  /*async show({ auth, response }: HttpContext) {
+    const user = auth.user!
+
+    if (!user) {
+      return response.unauthorized({ message: 'User not authenticated' })
+    }
+    console.log(user.avatar)
+    return response.ok({ avatar: user.avatar })
+  }*/
 }
