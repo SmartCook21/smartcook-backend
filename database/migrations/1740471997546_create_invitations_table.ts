@@ -1,5 +1,5 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
-import { InvitationState } from '#enums/invitation_state'
+//import { InvitationState } from '#enums/invitation_state'
 
 export default class extends BaseSchema {
   protected tableName = 'invitations'
