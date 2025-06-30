@@ -7,13 +7,13 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary()
-      table.uuid('course_id').references('id').inTable('course_lists').onDelete('CASCADE')
+      /*table.uuid('course_id').references('id').inTable('course_lists').onDelete('CASCADE')
       table.string('token', 36).notNullable()
       table
         .enum('state', Object.values(InvitationState))
         .notNullable()
         .defaultTo(InvitationState.WAITING)
-      table.string('invited_email').notNullable()
+      table.string('invited_email').notNullable()*/
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })
