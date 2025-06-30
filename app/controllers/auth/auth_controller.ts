@@ -68,7 +68,7 @@ export default class AuthController {
 
     const payload = await signUpValidator.validate(data)
 
-    if (app.inProduction) {
+    /*if (app.inProduction) {
       if (payload.turnstileToken && payload.turnstileToken !== '') {
         if (!(await verifyTurnstileToken(payload.turnstileToken))) {
           return response.badRequest({
@@ -82,7 +82,7 @@ export default class AuthController {
           message: 'Please complete the captcha',
         })
       }
-    }
+    }*/
 
     const throttleKey = `register_${await getClientIp(request)}`
     const limit = limiter.use('database', {
@@ -138,7 +138,7 @@ export default class AuthController {
 
     await limit.increment(throttleKey)
 
-    if (app.inProduction) {
+    /*if (app.inProduction) {
       if (turnstileToken && turnstileToken !== '') {
         if (!(await verifyTurnstileToken(turnstileToken))) {
           return response.badRequest({
@@ -152,7 +152,7 @@ export default class AuthController {
           message: 'Please complete the captcha',
         })
       }
-    }
+    }*/
 
     if (user) {
       /*await mail.sendLater(new PasswordResetNotification(user, token))*/
@@ -188,7 +188,7 @@ export default class AuthController {
       })
     }
 
-    if (app.inProduction) {
+    /*if (app.inProduction) {
       if (turnstileToken && turnstileToken !== '') {
         if (!(await verifyTurnstileToken(turnstileToken))) {
           return response.badRequest({
@@ -202,7 +202,7 @@ export default class AuthController {
           message: 'Please complete the captcha',
         })
       }
-    }
+    }*/
 
     await user.merge({ password }).save()
     await auth.use('web').login(user)
@@ -219,7 +219,7 @@ export default class AuthController {
     const { oldPassword, newPassword, turnstileToken } = await changePasswordSchema.validate(data)
     const user = auth.user!
 
-    if (app.inProduction) {
+    /*if (app.inProduction) {
       if (turnstileToken && turnstileToken !== '') {
         if (!(await verifyTurnstileToken(turnstileToken))) {
           return response.badRequest({
@@ -233,7 +233,7 @@ export default class AuthController {
           message: 'Please complete the captcha',
         })
       }
-    }
+    }*/
 
     try {
       await User.verifyCredentials(user.email, oldPassword)
