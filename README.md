@@ -96,4 +96,11 @@ DB_PASSWORD=your_database_password
 DB_DATABASE=your_database_name
 SESSION_DRIVER=cookie
 LIMITER_STORE=database
+API_VERSION=0.1
+AWS_ACCESS_KEY_ID=your_key
+AWS_SECRET_ACCESS_KEY=your_key
+AWS_REGION=your_region
+S3_BUCKET=your_bucket
+AWS_ENDPOINT=your_endpoint
+DRIVE_DISK=s3
 ```
